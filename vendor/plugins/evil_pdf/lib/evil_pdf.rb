@@ -18,7 +18,7 @@ class EvilPdf < WickedPdf
     
     pdf = WickedPdf.new.pdf_from_string s
     
-    Rails.logger.debug "---> PDF done in #{Time.now.to_i - t} secs"
+    Rails.logger.fatal "---> PDF done in #{Time.now.to_i - t} secs"
     File.open(pdf_file, 'wb') { |f| f.puts pdf }
     File.open(pdf_file, 'r')
   end
