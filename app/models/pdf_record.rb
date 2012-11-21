@@ -5,6 +5,6 @@ class PdfRecord < ActiveRecord::Base
   before_save :generate_pdf
   
   def generate_pdf
-    pdf = EvilPdf.string_to_pdf content, :filename => name
+    pdf = EvilPdf.generate content, :filename => name
   end
 end

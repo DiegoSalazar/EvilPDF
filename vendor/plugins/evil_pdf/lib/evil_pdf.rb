@@ -1,4 +1,8 @@
 class EvilPdf < WickedPdf
+  def self.generate(html, options = {})
+    (@evil_pdf ||= new).string_to_pdf html, options
+  end
+  
   def initialize
     super
     @exe_path = '/usr/local/Cellar/wkhtmltopdf/0.11.0_rc1/bin/wkhtmltopdf'
