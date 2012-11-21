@@ -14,8 +14,8 @@ class EvilPdf < WickedPdf
     Dir.mkdir root unless Dir.exists? root
     tmp_file = "#{root}#{t}.html"
     pdf_file = "#{root}#{options[:filename]}.pdf"
-    File.open(tmp_file, 'w') { |f| f.puts s }
-    pdf = `wkhtmltopdf #{tmp_file} #{pdf_file}`
+    #File.open(tmp_file, 'w') { |f| f.puts s }
+    pdf = WickedPdf.new.pdf_from_string s, :pdf => pdf_file #`wkhtmltopdf #{tmp_file} #{pdf_file}`
     Rails.logger.debug "---> PDF done in #{Time.now.to_i - t} secs"
     pdf = File.open(pdf_file, 'r').dup
     `rm #{tmp_file} #{pdf_file}`
