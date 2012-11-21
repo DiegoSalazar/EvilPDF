@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @pdf_record.name %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @pdf_record.content %>
+</p>
+
+<p>
+  <b>Pdf file name:</b>
+  <%= @pdf_record.pdf_file_name %>
+</p>
+
+<p>
+  <b>Pdf file size:</b>
+  <%= @pdf_record.pdf_file_size %>
+</p>
+
+<p>
+  <b>Pdf content type:</b>
+  <%= @pdf_record.pdf_content_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_pdf_record_path(@pdf_record) %> |
+<%= link_to 'Back', pdf_records_path %>

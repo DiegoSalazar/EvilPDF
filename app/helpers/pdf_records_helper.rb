@@ -1,0 +1,2 @@
+module PdfRecordsHelper
+end
