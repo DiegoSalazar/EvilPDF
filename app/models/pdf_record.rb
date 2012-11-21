@@ -8,7 +8,7 @@ class PdfRecord < ActiveRecord::Base
     :path => "/:class/:id/:filename"
   }
   
-  #before_save :generate_pdf
+  before_save :generate_pdf
   
   def generate_pdf
     pdf = EvilPdf.generate content, :filename => name if new_record? || content_changed?
