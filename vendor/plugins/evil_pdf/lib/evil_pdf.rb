@@ -10,11 +10,14 @@ class EvilPdf < WickedPdf
   
   def string_to_pdf(s, options = {})
     t = Time.now.to_i
-    tmp_file = "#{Rails.root}/tmp/pdf-#{t}.html"
+    root = "#{Rails.root}/tmp/pdf/"
+    tmp_file = "#{root}#{t}.html"
+    pdf_file = "#{root}#{options[:filename]}.pdf"
     File.open(tmp_file, 'w') { |f| f.puts s }
-    pdf = `wkhtmltopdf #{tmp_file} #{options[:filename]}.pdf`
+    pdf = `wkhtmltopdf #{tmp_file} #{pdf_file}`
     Rails.logger.debug "---> PDF done in #{Time.now.to_i - t} secs"
-    `rm #{tmp_file}`
+    pdf = File.open(pdf_file, 'r').dup
+    `rm #{tmp_file} #{pdf_file}`
     pdf
   end
 end
