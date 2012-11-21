@@ -1,6 +1,15 @@
 class PdfRecord < ActiveRecord::Base
   attr_accessible :content, :name
-  has_attached_file :pdf
+  
+  if Rails.env.production?
+    has_attached_file :pdf, { 
+      :storage => :s3, 
+      :s3_credentials => "#{Rails.root}/config/s3.yml",
+      :path => "/:class/:id/:filename"
+    }
+  else
+    has_attached_file :pdf
+  end
   
   before_save :generate_pdf
   

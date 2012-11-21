@@ -5,6 +5,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-heroku'
 gem 'delayed_job'
 gem 'paperclip'
+gem 'aws-s3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
