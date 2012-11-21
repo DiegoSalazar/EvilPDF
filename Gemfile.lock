@@ -108,6 +108,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     wicked_pdf (0.8.0)
       rails
+    wkhtmltopdf-heroku (1.0.0)
 
 PLATFORMS
   ruby
@@ -122,3 +123,4 @@ DEPENDENCIES
   sqlite3
   uglifier (>= 1.0.3)
   wicked_pdf
+  wkhtmltopdf-heroku
