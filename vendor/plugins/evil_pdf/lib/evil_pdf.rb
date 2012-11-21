@@ -12,7 +12,7 @@ class EvilPdf < WickedPdf
     t = Time.now.to_i
     tmp_file = "#{Rails.root}/tmp/pdf-#{t}.html"
     File.open(tmp_file, 'w') { |f| f.puts s }
-    pdf = `wkhtmltopdf #{tmp_file} #{options[:filename]}`
+    pdf = `wkhtmltopdf #{tmp_file} #{options[:filename]}.pdf`
     Rails.logger.debug "---> PDF done in #{Time.now.to_i - t} secs"
     `rm #{tmp_file}`
     pdf
