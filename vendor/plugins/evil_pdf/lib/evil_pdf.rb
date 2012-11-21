@@ -11,6 +11,7 @@ class EvilPdf < WickedPdf
   def string_to_pdf(s, options = {})
     t = Time.now.to_i
     root = "#{Rails.root}/tmp/pdf/"
+    Dir.mkdir root unless Dir.exists? root
     tmp_file = "#{root}#{t}.html"
     pdf_file = "#{root}#{options[:filename]}.pdf"
     File.open(tmp_file, 'w') { |f| f.puts s }
