@@ -10,7 +10,10 @@ gem 'aws-s3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3', :group => :development
+group :development do
+  gem 'sqlite3'
+  gem 'xml-simple'
+end
 
 gem 'pg', :group => :production
 

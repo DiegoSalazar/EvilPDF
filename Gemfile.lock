@@ -132,3 +132,4 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   wicked_pdf
   wkhtmltopdf-heroku
+  xml-simple
