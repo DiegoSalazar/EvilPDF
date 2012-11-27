@@ -65,6 +65,9 @@ GEM
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
+    pdfkit (0.5.2)
+    pdfkit-heroku (0.1.2)
+      pdfkit
     pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -122,6 +125,8 @@ DEPENDENCIES
   delayed_job
   jquery-rails
   paperclip
+  pdfkit
+  pdfkit-heroku
   pg
   rails (= 3.2.6)
   sass-rails (~> 3.2.3)

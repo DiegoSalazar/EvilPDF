@@ -1,4 +1,4 @@
-class EvilPdf < WickedPdf
+class EvilPdf < PDFKit
   def self.generate(html, options = {})
     (@evil_pdf ||= new).generate html, options
   end
