@@ -6,11 +6,6 @@
 </p>
 
 <p>
-  <b>Content:</b>
-  <%= @pdf_record.content %>
-</p>
-
-<p>
   <b>Pdf file name:</b>
   <%= @pdf_record.pdf_file_name %>
 </p>
@@ -26,8 +21,7 @@
 </p>
 
 <p>
-  <b>Pdf URL:</b>
-  <%= @pdf_record.pdf.url %>
+  <%= link_to 'Download PDF', @pdf_record.pdf.url %>
 </p>
 
 
