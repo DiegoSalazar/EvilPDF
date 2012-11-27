@@ -5,6 +5,7 @@ class EvilPdf
   def initialize(record, options = {})
     @record = record
     @options = options
+    Dir.mkdir './tmp' unless Dir.exists? './tmp'
   end
   
   def from_urls(urls)
@@ -23,9 +24,9 @@ class EvilPdf
   end
   
   def generate
-    pdfkit = PDFKit.new @html, @options[:pdfkit] || {}
-    @tmp_files << "./tmp/partial-#{@record.id}-#{Time.now.to_i}.pdf"
-    pdfkit.to_file @tmp_files.last
+    tmp_file = "./tmp/partial-#{@record.id}.pdf"
+    PDFKit.new(@html, @options[:pdfkit] || {}).to_file tmp_file
+    @tmp_files << tmp_file
   end
   
   # using ghostscript to combine multiple pdfs into 1
