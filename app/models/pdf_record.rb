@@ -10,7 +10,7 @@ class PdfRecord < ActiveRecord::Base
   validates_attachment_content_type :pdf
   
   def pdf_from_urls
-    self.pdf = EvilPdf.new(self).from_urls self.urls
+    self.pdf = EvilPdf.new(self).from_urls self.urls.split("\n").map(&:strip)
     self.save
   end
 end
