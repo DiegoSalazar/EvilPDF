@@ -7,7 +7,7 @@ class PdfRecord < ActiveRecord::Base
     :bucket => 'pdf_record_test',
     :path => "/:class/:id/:filename"
   }
-  validates_attachment_content_type :pdf
+  validates_attachment_content_type :pdf, :content_type => ['application/pdf', 'application/x-pdf']
   
   def pdf_from_urls
     self.pdf = EvilPdf.new(self).from_urls self.urls.split("\n").map(&:strip)
