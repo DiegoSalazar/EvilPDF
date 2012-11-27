@@ -18,6 +18,12 @@ class EvilPdf
     File.open combined_name, 'r'
   end
   
+  def to_file(name)
+    PDFKit.new(@html, @options[:pdfkit] || {}).to_file name
+  end
+  
+  private
+  
   def get_file(url)
     @filename = url.split('/').last
     @html = open(url).read
@@ -25,7 +31,7 @@ class EvilPdf
   
   def generate
     tmp_file = "./tmp/partial-#{@record.id}.pdf"
-    PDFKit.new(@html, @options[:pdfkit] || {}).to_file tmp_file
+    to_file tmp_file
     @tmp_files << tmp_file
   end
   
@@ -36,6 +42,6 @@ class EvilPdf
   end
   
   def combined_name
-    @combined_name ||= "#{@options[:filename] || @record.name}-#{Time.now.to_i}.pdf"
+    @combined_name ||= "./tmp/#{(@options[:filename] || @record.name).parameterize}-#{Time.now.to_i}.pdf"
   end
 end
