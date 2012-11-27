@@ -12,7 +12,7 @@ class EvilPdf
     @tmp_files = []
     urls.each_with_index do |url, i|
       get_file url
-      generate
+      generate i
     end
     combine
     File.open combined_name, 'r'
@@ -29,8 +29,8 @@ class EvilPdf
     @html = open(url).read
   end
   
-  def generate
-    tmp_file = "./tmp/partial-#{@record.id}-#{SecureRandom.hex(16)}.pdf"
+  def generate(i)
+    tmp_file = "./tmp/partial-#{@record.id}-#{i}.pdf"
     to_file tmp_file
     @tmp_files << tmp_file
   end
