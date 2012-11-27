@@ -19,7 +19,7 @@ class EvilPdf
   
   def get_file(url)
     @filename = url.split('/').last
-    @html = open url
+    @html = open(url).read
   end
   
   def generate
