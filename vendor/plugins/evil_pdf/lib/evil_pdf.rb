@@ -39,7 +39,7 @@ class EvilPdf
   def combine
     gs_opts = "-q -dNOPAUSE -sDEVICE=pdfwrite"
     gs_cmd = "gs #{gs_opts} -sOutputFile=#{combined_name} -dBATCH #{@tmp_files.join(' ')}"
-    Rails.logger.fatal "Combining PDFs: #{gs_cmd}"
+    Rails.logger.debug "Combining PDFs: #{gs_cmd}"
     system gs_cmd
   end
   
