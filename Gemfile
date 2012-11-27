@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.6'
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-heroku'
+#gem 'wicked_pdf'
+#gem 'wkhtmltopdf-heroku'
 gem 'delayed_job'
 gem 'paperclip'
 gem 'aws-s3'
