@@ -44,7 +44,7 @@ class PdfRecordsController < ApplicationController
     @pdf_record.pdf_from_urls
     
     respond_to do |format|
-      if @pdf_record.save
+      if @pdf_record.errors.empty? && @pdf_record.save
         format.html { redirect_to @pdf_record, notice: 'Pdf record was successfully created.' }
         format.json { render json: @pdf_record, status: :created, location: @pdf_record }
       else
