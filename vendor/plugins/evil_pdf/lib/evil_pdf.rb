@@ -4,6 +4,7 @@ class EvilPdf < WickedPdf
   end
   
   def generate(s, options = {})
+    Rails.logger.debug "Started PDF gen"
     t = Time.now.to_i
     root = "#{Rails.root}/tmp"
     Dir.mkdir root unless Dir.exists? root
@@ -13,7 +14,9 @@ class EvilPdf < WickedPdf
     
     pdf = EvilPdf.new.pdf_from_string s
     
-    Rails.logger.info "---> PDF done in #{Time.now.to_i - t} secs"
-    File.open(pdf_file, 'wb') { |f| f.puts pdf }
+    Rails.logger.debug "---> PDF done in #{Time.now.to_i - t} secs"
+    f = File.open(pdf_file, 'wb') { |f| f.puts pdf }
+    Rails.logger.debug "Generated PDF! #{f.size}"
+    f
   end
 end
