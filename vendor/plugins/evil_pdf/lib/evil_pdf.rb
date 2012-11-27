@@ -24,7 +24,7 @@ class EvilPdf
   
   def generate
     pdfkit = PDFKit.new @html, @options[:pdfkit] || {}
-    @tmp_files << File.expand_path("../partial-#{@record.id}-#{Time.now.to_i}.pdf", Rails.root)
+    @tmp_files << "./tmp/partial-#{@record.id}-#{Time.now.to_i}.pdf"
     pdfkit.to_file @tmp_files.last
   end
   
