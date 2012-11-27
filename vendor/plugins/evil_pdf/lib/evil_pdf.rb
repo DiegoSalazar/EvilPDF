@@ -19,7 +19,7 @@ class EvilPdf
   end
   
   def to_file(name)
-    PDFKit.new(@html, @options[:pdfkit] || {}).to_file name
+    PDFKit.new(@html, @options).to_file name
   end
   
   private
@@ -30,7 +30,7 @@ class EvilPdf
   end
   
   def generate
-    tmp_file = "./tmp/partial-#{@record.id}.pdf"
+    tmp_file = "./tmp/partial-#{@record.id}-#{SecureRandom.hex(16)}.pdf"
     to_file tmp_file
     @tmp_files << tmp_file
   end
@@ -39,7 +39,7 @@ class EvilPdf
   def combine
     gs_opts = "-q -dNOPAUSE -sDEVICE=pdfwrite"
     gs_cmd = "gs #{gs_opts} -sOutputFile=#{combined_name} -dBATCH #{@tmp_files.join(' ')}"
-    Rails.logger.debug "Combining PDFs: #{gs_cmd}"
+    Rails.logger.fatal "Combining PDFs: #{gs_cmd}"
     system gs_cmd
   end
   
