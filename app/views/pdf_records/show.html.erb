@@ -25,6 +25,11 @@
   <%= @pdf_record.pdf_content_type %>
 </p>
 
+<p>
+  <b>Pdf URL:</b>
+  <%= @pdf_record.pdf.url %>
+</p>
+
 
 <%= link_to 'Edit', edit_pdf_record_path(@pdf_record) %> |
 <%= link_to 'Back', pdf_records_path %>
