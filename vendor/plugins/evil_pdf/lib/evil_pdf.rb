@@ -38,7 +38,9 @@ class EvilPdf
   # using ghostscript to combine multiple pdfs into 1
   def combine
     gs_opts = "-q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite"
-    system "gs #{gs_opts} -sOutputFile=#{combined_name} #{@tmp_files.join(' ')}"
+    gs_cmd = "gs #{gs_opts} -sOutputFile=#{combined_name} #{@tmp_files.join(' ')}"
+    Rails.logger.debug "Combining PDFs: #{gs_cmd}"
+    system gs_cmd
   end
   
   def combined_name
