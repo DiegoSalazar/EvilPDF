@@ -41,10 +41,10 @@ class PdfRecordsController < ApplicationController
   # POST /pdf_records.json
   def create
     @pdf_record = PdfRecord.new(params[:pdf_record])
+    @pdf_record.pdf_from_urls
     
     respond_to do |format|
       if @pdf_record.save
-        @pdf_record.pdf_from_urls
         format.html { redirect_to @pdf_record, notice: 'Pdf record was successfully created.' }
         format.json { render json: @pdf_record, status: :created, location: @pdf_record }
       else

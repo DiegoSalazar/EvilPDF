@@ -27,10 +27,12 @@ class EvilPdf
   def get_file(url)
     @filename = url.split('/').last
     @html = open(url).read
+  rescue OpenURI::HTTPError => e
+    @record.errors.add :pdf, "HTTPError #{e.message}: #{url}"
   end
   
   def generate(i)
-    tmp_file = "./tmp/partial-#{@record.id}-#{i}.pdf"
+    tmp_file = "./tmp/partial-#{Time.now.to_i}-#{i}.pdf"
     to_file tmp_file
     @tmp_files << tmp_file
   end
@@ -44,6 +46,6 @@ class EvilPdf
   end
   
   def combined_name
-    @combined_name ||= "./tmp/#{(@options[:filename] || @record.name).parameterize}-#{Time.now.to_i}.pdf"
+    @combined_name ||= "./tmp/#{@record.name.parameterize}-#{Time.now.to_i}.pdf"
   end
 end
