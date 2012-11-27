@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121020312) do
+ActiveRecord::Schema.define(:version => 20121127044953) do
 
   create_table "pdf_records", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20121121020312) do
     t.string   "pdf_content_type"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.text     "urls"
   end
 
 end

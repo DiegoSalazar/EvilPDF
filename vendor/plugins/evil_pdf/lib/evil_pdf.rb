@@ -1,22 +1,40 @@
-class EvilPdf < PDFKit
-  def self.generate(html, options = {})
-    (@evil_pdf ||= new).generate html, options
+class EvilPdf
+  require 'open-uri'
+  require 'pdfkit'
+  
+  def initialize(record, options = {})
+    @record = record
+    @options = options
   end
   
-  def generate(s, options = {})
-    Rails.logger.debug "Started PDF gen"
-    t = Time.now.to_i
-    root = "#{Rails.root}/tmp"
-    Dir.mkdir root unless Dir.exists? root
-    pdf_dir = "#{root}/pdf"
-    Dir.mkdir pdf_dir unless Dir.exists? pdf_dir
-    pdf_file = "#{pdf_dir}/#{options[:filename]}.pdf"
-    
-    pdf = EvilPdf.new.pdf_from_string s
-    
-    Rails.logger.debug "---> PDF done in #{Time.now.to_i - t} secs"
-    f = File.open(pdf_file, 'wb') { |f| f.puts pdf }
-    Rails.logger.debug "Generated PDF! #{f.size}"
-    f
+  def from_urls(urls)
+    @tmp_files = []
+    urls.each_with_index do |url, i|
+      get_file url
+      generate
+    end
+    combine
+    File.open combined_name, 'r'
+  end
+  
+  def get_file(url)
+    @filename = url.split('/').last
+    @html = open url
+  end
+  
+  def generate
+    pdfkit = PDFKit.new @html, @options[:pdfkit] || {}
+    @tmp_files << "#{Rails.root}/tmp/partial-#{@record.id}-#{Time.now.to_i}.pdf"
+    pdfkit.to_file @tmp_files.last
+  end
+  
+  # using ghostscript to combine multiple pdfs into 1
+  def combine
+    gs_opts = "-q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite"
+    system "gs #{gs_opts} -sOutputFile=#{combined_name} #{@tmp_files.join(' ')}"
+  end
+  
+  def combined_name
+    @combined_name ||= "#{@options[:filename] || @record.name}-#{Time.now.to_i}.pdf"
   end
 end

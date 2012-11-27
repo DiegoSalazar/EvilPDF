@@ -1,5 +1,5 @@
 class PdfRecord < ActiveRecord::Base
-  attr_accessible :content, :name, :pdf
+  attr_accessible :content, :name, :pdf, :urls
   
   has_attached_file :pdf, { 
     :storage => :s3, 
@@ -7,10 +7,10 @@ class PdfRecord < ActiveRecord::Base
     :bucket => 'pdf_record_test',
     :path => "/:class/:id/:filename"
   }
+  validates_attachment_content_type :pdf
   
-  before_save :generate_pdf
-  
-  def generate_pdf
-    pdf = EvilPdf.generate content, :filename => name if new_record? || content_changed?
+  def pdf_from_urls
+    self.pdf = EvilPdf.new(self).from_urls self.urls
+    self.save
   end
 end
