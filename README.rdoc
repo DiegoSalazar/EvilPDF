@@ -3,6 +3,7 @@
 Mock app to try demo the EvilPDF gem
 Generates a PDF file from an array of URLs
 
+Demo app on Heroku[http://http://evilpdf.herokuapp.com]
 
 == Usage
   
