@@ -49,9 +49,6 @@ GEM
       activerecord (>= 2.1.0, < 4)
       delayed_job (~> 3.0)
     erubis (2.7.0)
-    evil_pdf (0.0.1)
-      pdfkit
-      pdfkit-heroku
     execjs (1.4.0)
       multi_json (~> 1.0)
     hike (1.2.1)
@@ -131,7 +128,6 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   daemons
   delayed_job_active_record
-  evil_pdf
   jquery-rails
   paperclip
   pdfkit
