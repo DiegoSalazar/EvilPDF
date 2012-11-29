@@ -1,5 +1,6 @@
 class PdfRecord < ActiveRecord::Base
-  attr_accessible :content, :name, :pdf, :urls
+  attr_accessible :content, :name, :pdf, :urls, :async
+  attr_accessor :async
   
   has_attached_file :pdf, { 
     :storage => :s3, 
@@ -11,7 +12,7 @@ class PdfRecord < ActiveRecord::Base
   validates_presence_of :name
   
   def pdf_from_urls(async = false)
-    self.pdf = EvilPdf.new(self, :async => true).from_urls urls.lines
+    self.pdf = EvilPdf.new(self, :async => self.async == '1').from_urls urls.lines
     save
   end
 end
