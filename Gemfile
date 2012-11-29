@@ -7,7 +7,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'paperclip'
 gem 'aws-s3'
-gem 'evil_pdf', '>= 0.0.2'
+gem 'evil_pdf', '~> 0.0.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
