@@ -10,25 +10,29 @@
   <pre><%= @pdf_record.urls %></pre>
 </p>
 
-<p>
-  <b>Pdf file name:</b>
-  <%= @pdf_record.pdf_file_name %>
-</p>
+<% if @pdf_record.pdf.exists? %>
+  <p>
+    <b>Pdf file name:</b>
+    <%= @pdf_record.pdf_file_name %>
+  </p>
 
-<p>
-  <b>Pdf file size:</b>
-  <%= number_to_human_size @pdf_record.pdf_file_size %>
-</p>
+  <p>
+    <b>Pdf file size:</b>
+    <%= number_to_human_size @pdf_record.pdf_file_size %>
+  </p>
 
-<p>
-  <b>Pdf content type:</b>
-  <%= @pdf_record.pdf_content_type %>
-</p>
+  <p>
+    <b>Pdf content type:</b>
+    <%= @pdf_record.pdf_content_type %>
+  </p>
 
-<p>
-  <%= link_to 'Download PDF', @pdf_record.pdf.url %>
-</p>
-
+  <p>
+    <%= link_to 'Download PDF', @pdf_record.pdf.url %>
+  </p>
+  
+<% else %>
+  <p>Pending...</p>
+<% end %>
 
 <%= link_to 'Edit', edit_pdf_record_path(@pdf_record) %> |
 <%= link_to 'Back', pdf_records_path %>
