@@ -12,7 +12,7 @@ class PdfRecord < ActiveRecord::Base
   validates_presence_of :name
   
   def pdf_from_urls(async = false)
-    self.pdf = EvilPdf.new(self, :async => async == '1').from_urls urls.lines
+    self.pdf = EvilPdf.new(name, :async => async == '1').from_urls urls.lines
     save unless async == '1'
   end
 end
