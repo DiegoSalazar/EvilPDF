@@ -1,5 +1,4 @@
 class PdfRecord < ActiveRecord::Base
-  require 'evil_pdf'
   attr_accessible :content, :name, :pdf, :urls, :async
   attr_accessor :async
   
