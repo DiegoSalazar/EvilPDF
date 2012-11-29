@@ -11,8 +11,7 @@ class EvilPdf
   def from_urls(urls)
     @tmp_files = []
     urls.each_with_index do |url, i|
-      get_file url
-      generate i
+      get_file(url) and generate(i)
     end
     combine
     File.open combined_name, 'r'
@@ -29,6 +28,7 @@ class EvilPdf
     @html = open(url).read
   rescue OpenURI::HTTPError => e
     @record.errors.add :pdf, "HTTPError #{e.message}: #{url}"
+    false
   end
   
   def generate(i)

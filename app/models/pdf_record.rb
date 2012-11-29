@@ -11,7 +11,7 @@ class PdfRecord < ActiveRecord::Base
   validates_presence_of :name
   
   def pdf_from_urls
-    self.pdf = EvilPdf.new(self).from_urls self.urls.split("\n").map(&:strip)
-    self.save
+    self.pdf = EvilPdf.new(self).from_urls urls.lines
+    save
   end
 end
