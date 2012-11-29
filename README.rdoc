@@ -4,19 +4,22 @@ Generate a PDF file from an array of URLs
 
 
 == Usage
-
+  
   pdf_record = PdfRecord.new :name => 'file_name_no_ext'
-  evil_pdf = EvilPdf.new pdf_record, 
+  
+  evil_pdf = EvilPdf.new pdf_record,
     :async => true, # run in delayed job
 
-  urls = ['http://google.com']
-  evil_pdf.from_urls! urls
+  evil_pdf.from_urls! ['http://google.com']
   
   # save to db
   pdf_record.pdf = evil_pdf.file_handle
+  pdf_record.save
   
   # immediate download
-  send_file evil_pdf.file_path, :type => "application/pdf", :disposition => "inline"
+  send_file evil_pdf.file_path, 
+    :type => "application/pdf", 
+    :disposition => "inline"
   
 == Dependencies
 
