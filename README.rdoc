@@ -5,18 +5,24 @@ Generate a PDF file from an array of URLs
 
 == Usage
 
-  pdf_record = PdfRecord.new :name => 'name_of_pdf_file_no_ext'
-  evil_pdf = EvilPdf.new pdf_record
+  pdf_record = PdfRecord.new :name => 'file_name_no_ext'
+  evil_pdf = EvilPdf.new pdf_record, 
+    :async => true, # run in delayed job
 
   urls = ['http://google.com']
-  pdf_file_handle = evil_pdf.from_urls(urls, 
-    :async => true, # run in delayed job
-    :inline => false # true if you want to have the client download it immediately, async automatically false
-  )
-  pdf_record.pdf = pdf_file_handle
+  evil_pdf.from_urls! urls
+  
+  # save to db
+  pdf_record.pdf = evil_pdf.file_handle
+  
+  # immediate download
+  send_file evil_pdf.file_path, :type => "application/pdf", :disposition => "inline"
   
 == Dependencies
 
-Uses PDFKit wrapper over wkhtmltopdf to generate PDF from HTML and Ghostscript to combine PDFs into one file.
+- PDFKit[https://github.com/pdfkit/pdfkit] wrapper
+- wkhtmltopdf[http://github.com/antialize/wkhtmltopdf] binary
+- Ghostscript[http://www.ghostscript.com/] to combine PDFs into one file.
+- delayed_job
 
 

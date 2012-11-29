@@ -10,8 +10,8 @@ class PdfRecord < ActiveRecord::Base
   validates_attachment_content_type :pdf, :content_type => ['application/pdf', 'application/x-pdf']
   validates_presence_of :name
   
-  def pdf_from_urls
-    self.pdf = EvilPdf.new(self).from_urls urls.lines
+  def pdf_from_urls(async = false)
+    self.pdf = EvilPdf.new(self, :async => true).from_urls urls.lines
     save
   end
 end
